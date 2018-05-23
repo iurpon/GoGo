@@ -46,4 +46,15 @@ public class Lunch {
     public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
     }
+
+
+    @Override
+    public String toString() {
+        return "Lunch{" +
+                "description='" + description + '\'' +
+                ", restaurant='" + restaurant + '\'' +
+                ", price=" + price +
+                ", localDate=" + localDate +
+                '}';
+    }
 }
