@@ -14,7 +14,6 @@ public class LunchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.debug("forward lunch.jsp");
-        logger.info("ololollollllllllllllllllllllllllllllllll");
         request.getRequestDispatcher("/lunch.jsp").forward(request, response);
     }
 }
