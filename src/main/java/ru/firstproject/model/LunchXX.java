@@ -2,13 +2,13 @@ package ru.firstproject.model;
 
 import java.time.LocalDate;
 
-public class Lunch {
+public class LunchXX {
     private String description;
     private String restaurant;
     private double price;
     private LocalDate localDate;
 
-    public Lunch(String description, String restaurant, double price, LocalDate localDate) {
+    public LunchXX(String description, String restaurant, double price, LocalDate localDate) {
         this.description = description;
         this.restaurant = restaurant;
         this.price = price;
