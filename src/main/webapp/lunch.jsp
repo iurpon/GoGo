@@ -10,35 +10,33 @@
 <html>
 <head>
     <title>Choose luch you want</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <h3><a href="index.html">Home</a></h3>
 <h2>Meals</h2>
 <hr/>
 <h1>Representing lunch for date ${date}</h1>
+<h1>${choise}</h1>
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
 
     <tr>
 
         <th>Description</th>
-        <th>Restourant</th>
+        <th>Restaurant</th>
         <th>Price</th>
-        <th>Date</th>
+        <th>Vote</th>
     </tr>
     </thead>
-    <c:forEach items="${lunch}" var="meal">
-        <jsp:useBean id="meal" scope="page" type="ru.firstproject.to.LunchView"/>
-        <tr >
- <%--           <td>
-                    &lt;%&ndash;${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}&ndash;%&gt;
-                    &lt;%&ndash;<%=TimeUtil.toString(meal.getDateTime())%>&ndash;%&gt;
-                    &lt;%&ndash;${fn:replace(meal.dateTime, 'T', ' ')}&ndash;%&gt;
-                    ${fn:formatDateTime(meal.dateTime)}
-            </td>--%>
-            <td>${meal.description}</td>
-            <td>${meal.restaurant}</td>
-            <td>${meal.price}</td>
+    <c:forEach items="${lunch}" var="lunchView">
+        <jsp:useBean id="lunchView" scope="page" type="ru.firstproject.to.LunchView"/>
+        <tr votedData = "${lunchView.restaurant.equals(restaurantName)}">
+
+            <td>${lunchView.description}</td>
+            <td>${lunchView.restaurant}</td>
+            <td>${lunchView.price}</td>
+            <td><a href="lunch?vote=${lunchView.restaurant}">Vote</a></td>
 
         </tr>
     </c:forEach>
