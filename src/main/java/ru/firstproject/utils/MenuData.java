@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class MenuData {
     private MenuData(){}
 
-    public static final Menu MENU1
+/*    public static final Menu MENU1
             = new Menu(LocalDate.now(),23.34, "chicken", "barbeque sauce", "vegetable", "slice bread", "milk" );
     public static final Menu MENU2
             = new Menu(LocalDate.now(),18.22, "hot dog", "french fries", "beans", "fruit", "milk" );
@@ -17,5 +17,5 @@ public class MenuData {
     public static final Menu MENU4
             = new Menu(LocalDate.now(),23.34, "cheese", "pizza", "vegetable", "fruit", "milk" );
     public static final Menu MENU5
-            = new Menu(LocalDate.now(),17.56, "hamburger", "ketchup", "backed chips", "fruit", "milk" );
+            = new Menu(LocalDate.now(),17.56, "hamburger", "ketchup", "backed chips", "fruit", "milk" );*/
 }

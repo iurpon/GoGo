@@ -15,7 +15,7 @@ public class RestaurantData {
 
     public static List<Restaurant> restaurantList = new ArrayList<>();
     static {
-        RESTAURANT1.addMenu(MenuData.MENU1);
+/*        RESTAURANT1.addMenu(MenuData.MENU1);
         RESTAURANT2.addMenu(MenuData.MENU2);
         RESTAURANT3.addMenu(MenuData.MENU3);
         RESTAURANT4.addMenu(MenuData.MENU4);
@@ -24,6 +24,6 @@ public class RestaurantData {
         restaurantList.add(RESTAURANT2);
         restaurantList.add(RESTAURANT3);
         restaurantList.add(RESTAURANT4);
-        restaurantList.add(RESTAURANT5);
+        restaurantList.add(RESTAURANT5);*/
     }
 }

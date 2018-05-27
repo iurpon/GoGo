@@ -23,6 +23,6 @@ public class UserServlet extends HttpServlet {
         logger.debug("UserServlet doPost");
         int userId = Integer.parseInt(req.getParameter("userId"));
         AuthorizedUser.setId(userId);
-        resp.sendRedirect("lunch");
+        resp.sendRedirect("menu");
     }
 }

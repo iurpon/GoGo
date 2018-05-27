@@ -25,7 +25,7 @@ public class VotingStorage {
             todayResults = new HashMap<>();
             todayResults.put(userId,restaurantName);
             voteHistory.put(now,todayResults);
-            return voted;
+//            return voted;
         }
         todayResults.values().stream().forEach(System.out::println);
         if(todayResults.get(userId) == null){
@@ -40,8 +40,26 @@ public class VotingStorage {
             }
 
         }
-        return voted;
+        String countVotes = countingVotes(todayResults);
+        return voted + countVotes;
     }
+
+    private static String countingVotes(Map<Integer, String> todayResults) {
+        StringBuilder sb = new StringBuilder(" Restaurant : " );
+        Map<String,Integer> map = new HashMap<>();
+        for(Map.Entry<Integer,String> entry : todayResults.entrySet()){
+            if(!map.containsKey(entry.getValue())){
+                map.put(entry.getValue(),1);
+            }else{
+                map.put(entry.getValue(),map.get(entry.getValue()) + 1);
+            }
+        }
+        for(Map.Entry<String,Integer> entry : map.entrySet()){
+            sb.append(  entry.getKey() + " was voted " + entry.getValue() + System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
     public static String getVote(int userId){
         Objects.requireNonNull(userId);
         Map<Integer,String> map = voteHistory.get(LocalDate.now());

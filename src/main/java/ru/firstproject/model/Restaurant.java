@@ -1,33 +1,43 @@
 package ru.firstproject.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Access(AccessType.FIELD)
 public class Restaurant {
+    public static final int START_SEQ = 100000;
+
+    @Id
+    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
+    //    @Column(name = "id", unique = true, nullable = false, columnDefinition = "integer default nextval('global_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
+    private int id;
+
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(max = 100)
     private String name;
-    private List<Menu> menuList;
+
 
     public Restaurant(String name) {
         this.name = name;
-        menuList = new ArrayList<>();
+
     }
-    public void addMenu(Menu menu){
-        menuList.add(menu);
+
+    public Restaurant() {
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setMenuList(List<Menu> menuList) {
-        this.menuList = menuList;
-    }
-
     public String getName() {
         return name;
     }
 
-    public List<Menu> getMenuList() {
-        return menuList;
-    }
 }

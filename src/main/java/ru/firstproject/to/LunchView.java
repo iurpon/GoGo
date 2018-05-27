@@ -15,10 +15,11 @@ public class LunchView {
     private LocalDate localDate;
     public LunchView(Restaurant restaurant){
         this.restaurant = restaurant.getName();
-        fillTheView(restaurant.getMenuList());
+//        fillTheView(restaurant.getMenuList());
 
     }
 
+/*
     private void fillTheView(List<Menu> menu){
         if(menu == null){
             this.description = "No lunch today. We are sorry";
@@ -36,7 +37,7 @@ public class LunchView {
         else{
             this.localDate = menu1.getLocalDate();
             this.price = menu1.getPrice();
-            String[] dish =  menu1.getDishes();
+//            String[] dish =  menu1.getDishes();
             this.description = "";
             for(int i = 0; i<dish.length; i++){
                 this.description += dish[i] + ", ";
@@ -44,6 +45,7 @@ public class LunchView {
         }
 
     }
+*/
 
     public String getDescription() {
         return description;
