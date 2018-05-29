@@ -8,12 +8,13 @@ import java.time.LocalDate;
 import static ru.firstproject.model.Restaurant.START_SEQ;
 
 @NamedQueries({
-        @NamedQuery(name = Menu.ALL_SORTED, query = "SELECT m FROM Menu m"),
+        @NamedQuery(name = Menu.ALL_SORTED, query = "SELECT m FROM Menu m")
 })
 @Entity
 @Access(AccessType.FIELD)
+@Table(name = "menu")
 public class Menu {
-    public static final String ALL_SORTED = "User.getAllSorted";
+    public static final String ALL_SORTED = "Menu.getAllSorted";
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)

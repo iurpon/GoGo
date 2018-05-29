@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Access(AccessType.FIELD)
+@Table(name = "restaurant")
 public class Restaurant {
     public static final int START_SEQ = 100000;
 
@@ -40,4 +41,8 @@ public class Restaurant {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return name ;
+    }
 }
