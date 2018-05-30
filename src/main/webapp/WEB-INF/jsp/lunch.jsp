@@ -10,14 +10,14 @@
 <html>
 <head>
     <title>Choose luch you want</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-<h3><a href="index.html">Home</a></h3>
+<h3><a href="../../index.html">Home</a></h3>
 <h2>Meals</h2>
 <hr/>
-<%--<h1>Representing lunch for date ${date}</h1>--%>
-<%--<span>${choise}</span>--%>
+<h1>Representing lunch for date ${date}</h1>
+<span>${choise}</span>
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
 
@@ -29,9 +29,9 @@
         <th>Vote</th>
     </tr>
     </thead>
-    <c:forEach items="${menus}" var="menu">
-        <jsp:useBean id="menu" scope="page" type="ru.firstproject.model.Menu"/>
-        <tr >
+    <c:forEach items="${lunch}" var="menu">
+        <jsp:useBean id="lunchView" scope="page" type="ru.firstproject.to.LunchView"/>
+        <tr votedData = "${menu.restaurant.equals(restaurantName)}">
 
             <td>${menu.description}</td>
             <td>${menu.restaurant}</td>
