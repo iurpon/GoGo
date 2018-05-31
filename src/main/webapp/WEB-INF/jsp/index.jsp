@@ -7,7 +7,7 @@
 <body>
 <ul>
     <hr>
-    <form method="post" action="menu">
+    <form method="post" action="users">
         <b>Meals of&nbsp;</b>
         <select name="userId">
             <option value="1">User1</option>
