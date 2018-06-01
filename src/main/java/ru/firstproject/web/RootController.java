@@ -1,5 +1,7 @@
 package ru.firstproject.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class RootController {
+    private Logger logger = LoggerFactory.getLogger(RootController.class);
     @Autowired
     private MenuRepository repository;
 
@@ -39,6 +42,7 @@ public class RootController {
     public String setUser(HttpServletRequest request) {
         int userId = Integer.valueOf(request.getParameter("userId"));
         AuthorizedUser.setId(userId);
+        logger.debug("authorized user with id " + userId);
         return "redirect:menu";
     }
 }

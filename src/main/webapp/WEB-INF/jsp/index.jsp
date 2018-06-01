@@ -10,11 +10,12 @@
     <form method="post" action="users">
         <b>Meals of&nbsp;</b>
         <select name="userId">
-            <option value="1">User1</option>
-            <option value="2">User2</option>
-            <option value="3">User3</option>
-            <option value="4">User4</option>
-            <option value="0">Admin</option>
+            <option value="100010">User1</option>
+            <option value="100011">User2</option>
+            <option value="100012">User3</option>
+            <option value="100013">User4</option>
+            <option value="100014">User5</option>
+            <option value="100015">Admin</option>
         </select>
         <button type="submit">Select</button>
     </form>
