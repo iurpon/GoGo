@@ -34,9 +34,9 @@
         <tr >
 
             <td>${menu.description}</td>
-            <td>${menu.restaurant}</td>
+            <td>${menu.restaurant.name}</td>
             <td>${menu.price}</td>
-            <td><a href="lunch?vote=${menu.restaurant}">Vote</a></td>
+            <td><a href="restaurant/${menu.restaurant.id}">Vote</a></td>
 
         </tr>
     </c:forEach>

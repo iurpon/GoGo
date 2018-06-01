@@ -15,7 +15,7 @@ public class DataJpaVoteRepository implements VoteRepository{
 
     @Override
     public Vote getVote(int userId, LocalDate date) {
-        return repository.getVoteByUserIdAndDate(userId,date);
+        return repository.getVoteByUserIdAndRegistered(userId,date);
     }
 
     @Override

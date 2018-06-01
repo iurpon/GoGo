@@ -1,5 +1,8 @@
 package ru.firstproject.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -38,6 +41,7 @@ public class Menu {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rest_id")
+//    @Fetch(value = FetchMode.JOIN)
     private Restaurant restaurant;
 
     public Menu(LocalDate localDate, double price, String description) {

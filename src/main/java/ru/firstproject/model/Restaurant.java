@@ -43,6 +43,14 @@ public class Restaurant {
 
     @Override
     public String toString() {
-        return name ;
+        return "Restaurant : " + name ;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

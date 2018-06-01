@@ -13,6 +13,12 @@ import static ru.firstproject.model.Restaurant.START_SEQ;
 @AccessType(AccessType.Type.FIELD)
 @Table(name = "votes")
 public class Vote {
+    public Vote() {
+    }
+
+    public Vote(@NotNull LocalDate registered) {
+        this.registered = registered;
+    }
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
@@ -28,7 +34,39 @@ public class Vote {
     @JoinColumn(name = "rest_id")
     private Restaurant restaurant;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDate getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(LocalDate registered) {
+        this.registered = registered;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
