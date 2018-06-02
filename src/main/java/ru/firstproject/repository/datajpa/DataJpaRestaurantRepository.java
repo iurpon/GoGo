@@ -24,4 +24,9 @@ public class DataJpaRestaurantRepository implements RestaurantRepository{
     public Restaurant save(Restaurant restaurant) {
         return repository.save(restaurant);
     }
+
+    @Override
+    public String getName(int id) {
+        return repository.getName(id);
+    }
 }

@@ -1,5 +1,6 @@
 package ru.firstproject.model;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -41,7 +42,7 @@ public class Menu {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rest_id")
-//    @Fetch(value = FetchMode.JOIN)
+    @BatchSize(size = 200)
     private Restaurant restaurant;
 
     public Menu(LocalDate localDate, double price, String description) {

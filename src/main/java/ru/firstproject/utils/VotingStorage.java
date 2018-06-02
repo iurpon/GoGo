@@ -8,7 +8,8 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class VotingStorage {
-    private static final LocalTime timeLimit = LocalTime.of(11,00);
+    public static final LocalTime timeLimit = LocalTime.of(12,00);
+//    private static final LocalTime localTimeNow = LocalTime.of(11,00);
     private VotingStorage() {
     }
 

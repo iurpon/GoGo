@@ -11,7 +11,7 @@
 <jsp:include page="fragments/headTag.jsp"/>
 <head>
     <title>Choose luch you want</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
 <h3><a href="../../index.html">Home</a></h3>

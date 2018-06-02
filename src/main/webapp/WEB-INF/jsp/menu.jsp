@@ -11,7 +11,7 @@
 <jsp:include page="fragments/headTag.jsp"/>
 <head>
     <title>Choose luch you want</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
 <h3><a href="/voting">Home</a></h3>
@@ -19,6 +19,8 @@
 <hr/>
 <%--<h1>Representing lunch for date ${date}</h1>--%>
 <%--<span>${choise}</span>--%>
+<div>${msg}</div>
+<%--<div>${restaurantName}</div>--%>
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
 
@@ -32,12 +34,12 @@
     </thead>
     <c:forEach items="${menus}" var="menu">
         <jsp:useBean id="menu" scope="page" type="ru.firstproject.model.Menu"/>
-        <tr >
+        <tr  equalsName = "${menu.restaurant.name.equals(restaurantName)}" >
 
             <td>${menu.description}</td>
             <td>${menu.restaurant.name}</td>
             <td>${menu.price}</td>
-            <td><a href="restaurant/${menu.restaurant.id}">Vote</a></td>
+            <td><a href="restaurant/${menu.restaurant.id}/${menu.restaurant.name}">Vote</a></td>
 
         </tr>
     </c:forEach>
