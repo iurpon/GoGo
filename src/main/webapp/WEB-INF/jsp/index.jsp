@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Voting</title>
+    <jsp:include page="fragments/headTag.jsp"/>
 </head>
 <body>
 <ul>

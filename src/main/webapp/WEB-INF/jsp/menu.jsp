@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
+<jsp:include page="fragments/headTag.jsp"/>
 <head>
     <title>Choose luch you want</title>
     <link rel="stylesheet" href="../../css/style.css">

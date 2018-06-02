@@ -50,7 +50,7 @@ public class RootController {
         vote.setUser(userRepository.get(AuthorizedUser.getId()));
         vote.setRestaurant(restaurantRepository.get(id));
            voteRepository.save(vote);
-           return "redirect:menu";
+           return "redirect:/menu";
     }
 
     @PostMapping("/users")
@@ -58,6 +58,6 @@ public class RootController {
         int userId = Integer.valueOf(request.getParameter("userId"));
         AuthorizedUser.setId(userId);
         logger.debug("authorized user with id " + userId);
-        return "redirect:/menu";
+        return "redirect:menu";
     }
 }
