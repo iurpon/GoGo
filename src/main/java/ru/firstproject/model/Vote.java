@@ -1,5 +1,6 @@
 package ru.firstproject.model;
 
+import org.hibernate.annotations.Fetch;
 import org.springframework.data.annotation.AccessType;
 
 import javax.persistence.*;
@@ -30,7 +31,7 @@ public class Vote {
     @NotNull
     private LocalDate registered = LocalDate.now();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rest_id")
     private Restaurant restaurant;
 

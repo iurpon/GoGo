@@ -7,4 +7,5 @@ import java.time.LocalDate;
 public interface VoteRepository {
     Vote getVote(int userId, LocalDate date);
     Vote save(Vote vote);
+    Vote getUserVote(int userId,LocalDate date);
 }

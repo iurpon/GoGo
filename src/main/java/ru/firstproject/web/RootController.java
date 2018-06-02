@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.firstproject.AuthorizedUser;
 import ru.firstproject.model.Restaurant;
+import ru.firstproject.model.User;
 import ru.firstproject.model.Vote;
 import ru.firstproject.repository.MenuRepository;
 import ru.firstproject.repository.UserRepository;
@@ -46,7 +47,11 @@ public class RootController {
     public String users(Model model, RedirectAttributes attributes) {
         logger.debug("RootController Get(/menu");
 
-//        checkVote(id,model,restName);
+        Vote vote = voteRepository.getUserVote(AuthorizedUser.getId(),LocalDate.now());
+        if(vote != null){
+            checkVote(AuthorizedUser.getId(),model,vote.getRestaurant().getName());
+        }
+
         model.addAttribute("menus", menuRepository.getAll());
 
         return "menu";
@@ -63,10 +68,24 @@ public class RootController {
 
     @PostMapping("/users")
     public String setUser(HttpServletRequest request) {
+        logger.debug("/users  setUser()");
         int userId = Integer.valueOf(request.getParameter("userId"));
         AuthorizedUser.setId(userId);
+        User user = userRepository.get(userId);
+        if(user == null){
+            logger.debug("user == null");
+        }
+        else {
+            logger.debug("user != null");
+        }
+        String routing = "";
+        if(user.isAdmin()){
+            routing = "/admin";
+        }else {
+            routing  = "redirect:menu";
+        }
         logger.debug("authorized user with id " + userId);
-        return "redirect:menu";
+        return routing;
     }
 
     public void checkVote(int restId,Model model,RedirectAttributes attributes,String restaurantName){

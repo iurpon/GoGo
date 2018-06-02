@@ -1,7 +1,10 @@
 package ru.firstproject.repository;
 
+import org.springframework.data.repository.query.Param;
 import ru.firstproject.model.User;
+import ru.firstproject.model.Vote;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface UserRepository {
@@ -14,4 +17,6 @@ public interface UserRepository {
     User get(int id);
 
     List<User> getAll();
+
+    Vote findUserVote(int userId, LocalDate localDate);
 }

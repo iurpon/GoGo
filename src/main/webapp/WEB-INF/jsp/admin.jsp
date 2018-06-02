@@ -9,12 +9,11 @@
 </head>
 <body>
 <h3><a href="/voting">Home</a></h3>
-<h2>Meals</h2>
+<h2>Admin</h2>
 <hr/>
-<%--<h1>Representing lunch for date ${date}</h1>--%>
-<%--<span>${choise}</span>--%>
-<div>${msg}</div>
-<%--<div>${restaurantName}</div>--%>
+
+<%--<div>${msg}</div>
+&lt;%&ndash;<div>${restaurantName}</div>&ndash;%&gt;
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
 
@@ -37,6 +36,6 @@
 
         </tr>
     </c:forEach>
-</table>
+</table>--%>
 </body>
 </html>

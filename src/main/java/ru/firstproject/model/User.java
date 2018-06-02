@@ -44,7 +44,7 @@ public class User {
     private boolean isAdmin;
 
 
-/*    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private List<Vote> votes;
 
     public List<Vote> getVotes() {
@@ -53,7 +53,7 @@ public class User {
 
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
-    }*/
+    }
 
     public int getId() {
         return id;
