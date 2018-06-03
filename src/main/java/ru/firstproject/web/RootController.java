@@ -12,19 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 import ru.firstproject.AuthorizedUser;
+import ru.firstproject.model.Menu;
 import ru.firstproject.model.Restaurant;
 import ru.firstproject.model.User;
 import ru.firstproject.model.Vote;
 import ru.firstproject.repository.MenuRepository;
 import ru.firstproject.repository.UserRepository;
 import ru.firstproject.repository.VoteRepository;
-import ru.firstproject.repository.datajpa.RestaurantRepository;
+import ru.firstproject.repository.RestaurantRepository;
+import ru.firstproject.to.LunchView;
 import ru.firstproject.utils.VotingStorage;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class RootController {
@@ -56,6 +61,43 @@ public class RootController {
 
         return "menu";
     }
+    @GetMapping("/admin")
+    public String adminJob(Model model){
+        logger.debug("/admin adminJob()");
+
+        List<Restaurant> restaurantList = restaurantRepository.getAll();
+        List<Menu> menuList = menuRepository.findByDate(LocalDate.now());
+        List<LunchView> lunchViewList = createLunchView(restaurantList,menuList);
+        model.addAttribute("lunchList",lunchViewList);
+
+
+        return "admin";
+    }
+
+    private List<LunchView> createLunchView(List<Restaurant> restaurantList, List<Menu> menuList) {
+        logger.debug(" createLunchView ");
+        if(menuList.isEmpty()){
+            logger.debug("menuList is empty");
+            List<LunchView> lunchViewList = restaurantList.stream()
+                    .map(LunchView::new)
+                    .collect(Collectors.toList());
+            return lunchViewList;
+        }else{
+            logger.debug("menulist not empty");
+            Map<Integer,Menu>  menuMap = menuList.stream()
+                    .collect(Collectors.toMap(m -> m.getRestaurant().getId(),m -> m));
+            List<LunchView> lunchViewList = new ArrayList<>();
+            restaurantList.stream().
+                    forEach(r -> lunchViewList.add(
+                            new LunchView(r,menuMap.getOrDefault(r.getId(),new Menu(0.0,"")).getDescription()
+                                    ,menuMap.getOrDefault(r.getId(),new Menu(0.0,"")).getPrice())
+                            )
+                    );
+            return lunchViewList;
+        }
+//        logger.debug("why we are here?");
+//        return null;
+    }
 
     @GetMapping("/restaurant/{id}/{restaurantName}")
     public String getVote(@PathVariable("id") int id, @PathVariable("restaurantName") String restName,Model model,
@@ -80,7 +122,7 @@ public class RootController {
         }
         String routing = "";
         if(user.isAdmin()){
-            routing = "/admin";
+            routing = "redirect:admin";
         }else {
             routing  = "redirect:menu";
         }

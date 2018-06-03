@@ -13,29 +13,30 @@
 <hr/>
 
 <%--<div>${msg}</div>
-&lt;%&ndash;<div>${restaurantName}</div>&ndash;%&gt;
+&lt;%&ndash;<div>${restaurantName}</div>&ndash;%&gt;--%>
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
 
     <tr>
 
-        <th>Description</th>
+
         <th>Restaurant</th>
+        <th>Description</th>
         <th>Price</th>
-        <th>Vote</th>
+        <th>AddMenu</th>
     </tr>
     </thead>
-    <c:forEach items="${menus}" var="menu">
-        <jsp:useBean id="menu" scope="page" type="ru.firstproject.model.Menu"/>
+    <c:forEach items="${lunchList}" var="lunch">
+        <jsp:useBean id="lunch" scope="page" type="ru.firstproject.to.LunchView"/>
         <tr  equalsName = "${menu.restaurant.name.equals(restaurantName)}" >
 
-            <td>${menu.description}</td>
-            <td>${menu.restaurant.name}</td>
-            <td>${menu.price}</td>
-            <td><a href="restaurant/${menu.restaurant.id}/${menu.restaurant.name}">Vote</a></td>
+            <td>${lunch.restaurantName}</td>
+            <td>${lunch.description}</td>
+            <td>${lunch.price}</td>
+            <td><a href="addMenu/${lunch.restId}">Add</a></td>
 
         </tr>
     </c:forEach>
-</table>--%>
+</table>
 </body>
 </html>

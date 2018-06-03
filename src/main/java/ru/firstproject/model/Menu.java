@@ -50,6 +50,11 @@ public class Menu {
         this.price = price;
         this.description = description;
     }
+    public Menu(double price, String description) {
+        this.localDate = LocalDate.now();
+        this.price = price;
+        this.description = description;
+    }
 
     public Menu() {
     }

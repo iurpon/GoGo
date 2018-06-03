@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.firstproject.model.Restaurant;
+import ru.firstproject.repository.RestaurantRepository;
+
+import java.util.List;
 
 @Repository
-public class DataJpaRestaurantRepository implements RestaurantRepository{
+public class DataJpaRestaurantRepository implements RestaurantRepository {
     private static Logger logger = LoggerFactory.getLogger(DataJpaRestaurantRepository.class);
     @Autowired
     private ProxyRestaurantRepository repository;
@@ -28,5 +31,10 @@ public class DataJpaRestaurantRepository implements RestaurantRepository{
     @Override
     public String getName(int id) {
         return repository.getName(id);
+    }
+
+    @Override
+    public List<Restaurant> getAll() {
+        return repository.findAll();
     }
 }

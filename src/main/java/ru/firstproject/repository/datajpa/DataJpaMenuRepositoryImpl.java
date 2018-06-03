@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import ru.firstproject.model.Menu;
 import ru.firstproject.repository.MenuRepository;
 
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -20,5 +22,14 @@ public class DataJpaMenuRepositoryImpl  implements MenuRepository{
     public List<Menu> getAll() {
         logger.debug("DataJpaMenuRepositoryImpl getAll()");
         return repository.findAll();
+    }
+
+    @Override
+    public List<Menu> findByDate(LocalDate date) {
+        List<Menu> menuList = repository.findByLocalDate(date);
+        if(menuList == null){
+            return Collections.emptyList();
+        }
+        return menuList;
     }
 }

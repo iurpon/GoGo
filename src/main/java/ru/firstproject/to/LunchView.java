@@ -10,16 +10,26 @@ import java.util.Optional;
 
 public class LunchView {
     private String description;
-    private String restaurant;
+    private String restaurantName;
     private double price;
-    private LocalDate localDate;
+    private final LocalDate localDate;
+    private int  restId;
     public LunchView(Restaurant restaurant){
-        this.restaurant = restaurant.getName();
+        this.restaurantName = restaurant.getName();
+        restId = restaurant.getId();
+        localDate = LocalDate.now();
 //        fillTheView(restaurant.getMenuList());
 
     }
 
-/*
+    public LunchView(Restaurant restaurant,String description, double price) {
+        localDate = LocalDate.now();
+        this.restaurantName = restaurant.getName();
+        restId = restaurant.getId();
+        this.description = description;
+        this.price = price;
+    }
+    /*
     private void fillTheView(List<Menu> menu){
         if(menu == null){
             this.description = "No lunch today. We are sorry";
@@ -51,15 +61,34 @@ public class LunchView {
         return description;
     }
 
-    public String getRestaurant() {
-        return restaurant;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+
+
+
+    public int getRestId() {
+        return restId;
+    }
+
+    public void setRestId(int restId) {
+        this.restId = restId;
     }
 }

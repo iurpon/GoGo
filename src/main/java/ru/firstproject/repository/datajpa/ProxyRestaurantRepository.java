@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.firstproject.model.Restaurant;
 
+import java.util.List;
+
 @Transactional(readOnly = true)
 public interface ProxyRestaurantRepository extends JpaRepository<Restaurant,Integer> {
     @Override
@@ -18,4 +20,7 @@ public interface ProxyRestaurantRepository extends JpaRepository<Restaurant,Inte
 
     @Query("select r.name from Restaurant r where r.id =:id")
     String getName(@Param("id") int id);
+
+    @Override
+    List<Restaurant> findAll();
 }
