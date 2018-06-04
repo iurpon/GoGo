@@ -186,7 +186,60 @@ public class RootController {
         }
         return sb;
     }
-    public void userInfo(int userId){
+    @GetMapping("/addMenu/{id}/{restaurantName}")
+    public String addMenu(@PathVariable("id") int restId,Model model,@PathVariable("restaurantName") String name){
+        logger.debug("/addMenu getmappint");
+        model.addAttribute("restId",restId);
+        model.addAttribute("restaurantName",name);
+        return "addForm";
+    }
+    @PostMapping("/addMenu")
+    public String addMenu(Model model,HttpServletRequest request,RedirectAttributes attributes){
+        logger.debug("/addMenu postmapping");
+        int restId = Integer.parseInt(request.getParameter("id"));
+        List<Menu> list = menuRepository.findByDate(LocalDate.now());
+        boolean isPresent = list.stream().anyMatch(m -> m.getRestaurant().getId() == restId);
+        logger.debug(" isPresent " + isPresent + " menu for restaurant " + restId);
+        String msgToAdmin = "";
+        if(isPresent){
+            msgToAdmin = "menu is already done. Cant change it";
 
+        }else{
+            Restaurant restaurant = restaurantRepository.get(restId);
+            String menuDescription = getDescription(request);
+            double price = Double.parseDouble(request.getParameter("price"));
+            Menu newMenu = new Menu(price,menuDescription);
+            newMenu.setRestaurant(restaurant);
+            newMenu = menuRepository.save(newMenu);
+            logger.debug("trying to print saved newMenu");
+//        System.out.println(newMenu); lazy inti exception
+            msgToAdmin = "menu added succes";
+        }
+
+
+        attributes.addFlashAttribute("msgToAdmin", msgToAdmin);
+        return "redirect:admin";
+    }
+
+    private String getDescription(HttpServletRequest request) {
+        StringBuilder sb = new StringBuilder();
+        String dish1 = request.getParameter("dish1");
+        addDish(dish1,sb);
+        String dish2 = request.getParameter("dish2");
+        addDish(dish2,sb);
+        String dish3 = request.getParameter("dish3");
+        addDish(dish3,sb);
+        String dish4 = request.getParameter("dish4");
+        addDish(dish4,sb);
+        String dish5 = request.getParameter("dish5");
+        addDish(dish5,sb);
+        return sb.toString();
+    }
+
+    private void addDish(String dish1, StringBuilder sb) {
+        if(!dish1.isEmpty()){
+            sb.append(dish1);
+            sb.append(", ");
+        }
     }
 }

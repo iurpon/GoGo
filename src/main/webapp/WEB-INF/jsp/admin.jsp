@@ -14,6 +14,8 @@
 
 <%--<div>${msg}</div>
 &lt;%&ndash;<div>${restaurantName}</div>&ndash;%&gt;--%>
+
+<h1>${msgToAdmin}</h1>
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
 
@@ -28,12 +30,12 @@
     </thead>
     <c:forEach items="${lunchList}" var="lunch">
         <jsp:useBean id="lunch" scope="page" type="ru.firstproject.to.LunchView"/>
-        <tr  equalsName = "${menu.restaurant.name.equals(restaurantName)}" >
+        <tr   >
 
             <td>${lunch.restaurantName}</td>
             <td>${lunch.description}</td>
             <td>${lunch.price}</td>
-            <td><a href="addMenu/${lunch.restId}">Add</a></td>
+            <td><a href="addMenu/${lunch.restId}/${lunch.restaurantName}">Add</a></td>
 
         </tr>
     </c:forEach>

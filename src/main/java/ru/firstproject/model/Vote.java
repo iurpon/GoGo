@@ -12,7 +12,7 @@ import static ru.firstproject.model.Restaurant.START_SEQ;
 
 @Entity
 @AccessType(AccessType.Type.FIELD)
-@Table(name = "votes")
+@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date"}, name = "votes_unique_user_date_idx")})
 public class Vote {
     public Vote() {
     }

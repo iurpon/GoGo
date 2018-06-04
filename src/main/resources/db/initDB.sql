@@ -62,6 +62,8 @@ CREATE TABLE menu
   rest_id INTEGER NOT NULL,
   FOREIGN KEY (rest_id) REFERENCES RESTAURANT (id)
 );
+CREATE UNIQUE INDEX menu_unique_restaurant_date_idx ON votes (rest_id, date);
+
 CREATE TABLE users
 (
   id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),

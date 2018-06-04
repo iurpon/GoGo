@@ -16,7 +16,7 @@ import static ru.firstproject.model.Restaurant.START_SEQ;
 })
 @Entity
 @Access(AccessType.FIELD)
-@Table(name = "menu")
+@Table(name = "menu", uniqueConstraints = {@UniqueConstraint(columnNames = {"rest_id", "date"}, name = "menu_unique_restaurant_date_idx")})
 public class Menu {
     public static final String ALL_SORTED = "Menu.getAllSorted";
 
@@ -112,7 +112,7 @@ public class Menu {
                 ", localDate=" + localDate +
                 ", price=" + price +
                 ", description='" + description + '\'' +
-                ", restaurant=" + restaurant +
+                ", restaurant=" + restaurant.getName() +
                 '}';
     }
 }

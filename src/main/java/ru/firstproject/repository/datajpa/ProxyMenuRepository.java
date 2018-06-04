@@ -12,4 +12,8 @@ public interface ProxyMenuRepository extends JpaRepository<Menu,Integer> {
     List<Menu> findAll() ;
 
     List<Menu> findByLocalDate(LocalDate localDate);
+
+    @Override
+    @Transactional
+    Menu save(Menu entity);
 }

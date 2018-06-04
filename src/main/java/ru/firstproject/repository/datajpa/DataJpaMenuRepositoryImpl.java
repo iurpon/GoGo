@@ -32,4 +32,10 @@ public class DataJpaMenuRepositoryImpl  implements MenuRepository{
         }
         return menuList;
     }
+
+    @Override
+    public Menu save(Menu menu) {
+        logger.debug("DataJpaMenuRepository save()");
+        return repository.save(menu);
+    }
 }

@@ -9,6 +9,7 @@ import ru.firstproject.repository.MenuRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -24,5 +25,15 @@ public class JpaMenuRepositoryImpl implements MenuRepository {
         logger.debug("JpaMenuRepository getAll()");
         return em.createNamedQuery(Menu.ALL_SORTED, Menu.class).getResultList();
 //        return em.createQuery("FROM MENU",Menu.class).getResultList();
+    }
+
+    @Override
+    public List<Menu> findByDate(LocalDate date) {
+        return null;
+    }
+
+    @Override
+    public Menu save(Menu menu) {
+        return null;
     }
 }
