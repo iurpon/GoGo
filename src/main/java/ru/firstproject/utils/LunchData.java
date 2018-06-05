@@ -1,7 +1,5 @@
 package ru.firstproject.utils;
 
-import ru.firstproject.model.LunchXX;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

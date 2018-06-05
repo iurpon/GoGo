@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
+<jsp:include page="fragments/headTag.jsp"/>
 <head>
     <title>Meal</title>
     <link rel="stylesheet" href="css/style.css">
@@ -12,8 +13,9 @@
     <%--<h2>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h2>--%>
     <hr>
     <%--<jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>--%>
+
     <h2>Adding menu for restaurant : ${restaurantName}</h2>
-    <form method="post" action="/voting/addMenu">
+    <form method="post" action="/voting/admin/addMenu">
         <input type="hidden" name="id" value="${restId}">
         <dl>
             <dt>Dish 1</dt>

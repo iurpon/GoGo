@@ -32,18 +32,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
-public class RootController {
-    private Logger logger = LoggerFactory.getLogger(RootController.class);
-    @Autowired
-    private MenuRepository menuRepository;
-    @Autowired
-    private VoteRepository voteRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private RestaurantRepository restaurantRepository;
+@RequestMapping("/")
+public class RootController  extends AbstractController{
 
-    @GetMapping(value = "/")
+
+
+    @GetMapping()
     public String root() {
         return "index";
     }
@@ -52,52 +46,23 @@ public class RootController {
     public String users(Model model, RedirectAttributes attributes) {
         logger.debug("RootController Get(/menu");
 
-        Vote vote = voteRepository.getUserVote(AuthorizedUser.getId(),LocalDate.now());
-        if(vote != null){
-            checkVote(AuthorizedUser.getId(),model,vote.getRestaurant().getName());
+        if(VotingStorage.startVoting.get(LocalDate.now())!= null){
+            Vote vote = voteRepository.getUserVote(AuthorizedUser.getId(),LocalDate.now());
+            if(vote != null){
+                checkVote(AuthorizedUser.getId(),model,vote.getRestaurant().getName());
+            }
+
+            model.addAttribute("menus", menuRepository.getAll());
+        }else{
+            model.addAttribute("notReadyMsg","Sorry.Menu not ready");
         }
 
-        model.addAttribute("menus", menuRepository.getAll());
+
 
         return "menu";
     }
-    @GetMapping("/admin")
-    public String adminJob(Model model){
-        logger.debug("/admin adminJob()");
-
-        List<Restaurant> restaurantList = restaurantRepository.getAll();
-        List<Menu> menuList = menuRepository.findByDate(LocalDate.now());
-        List<LunchView> lunchViewList = createLunchView(restaurantList,menuList);
-        model.addAttribute("lunchList",lunchViewList);
 
 
-        return "admin";
-    }
-
-    private List<LunchView> createLunchView(List<Restaurant> restaurantList, List<Menu> menuList) {
-        logger.debug(" createLunchView ");
-        if(menuList.isEmpty()){
-            logger.debug("menuList is empty");
-            List<LunchView> lunchViewList = restaurantList.stream()
-                    .map(LunchView::new)
-                    .collect(Collectors.toList());
-            return lunchViewList;
-        }else{
-            logger.debug("menulist not empty");
-            Map<Integer,Menu>  menuMap = menuList.stream()
-                    .collect(Collectors.toMap(m -> m.getRestaurant().getId(),m -> m));
-            List<LunchView> lunchViewList = new ArrayList<>();
-            restaurantList.stream().
-                    forEach(r -> lunchViewList.add(
-                            new LunchView(r,menuMap.getOrDefault(r.getId(),new Menu(0.0,"")).getDescription()
-                                    ,menuMap.getOrDefault(r.getId(),new Menu(0.0,"")).getPrice())
-                            )
-                    );
-            return lunchViewList;
-        }
-//        logger.debug("why we are here?");
-//        return null;
-    }
 
     @GetMapping("/restaurant/{id}/{restaurantName}")
     public String getVote(@PathVariable("id") int id, @PathVariable("restaurantName") String restName,Model model,
@@ -186,60 +151,7 @@ public class RootController {
         }
         return sb;
     }
-    @GetMapping("/addMenu/{id}/{restaurantName}")
-    public String addMenu(@PathVariable("id") int restId,Model model,@PathVariable("restaurantName") String name){
-        logger.debug("/addMenu getmappint");
-        model.addAttribute("restId",restId);
-        model.addAttribute("restaurantName",name);
-        return "addForm";
-    }
-    @PostMapping("/addMenu")
-    public String addMenu(Model model,HttpServletRequest request,RedirectAttributes attributes){
-        logger.debug("/addMenu postmapping");
-        int restId = Integer.parseInt(request.getParameter("id"));
-        List<Menu> list = menuRepository.findByDate(LocalDate.now());
-        boolean isPresent = list.stream().anyMatch(m -> m.getRestaurant().getId() == restId);
-        logger.debug(" isPresent " + isPresent + " menu for restaurant " + restId);
-        String msgToAdmin = "";
-        if(isPresent){
-            msgToAdmin = "menu is already done. Cant change it";
-
-        }else{
-            Restaurant restaurant = restaurantRepository.get(restId);
-            String menuDescription = getDescription(request);
-            double price = Double.parseDouble(request.getParameter("price"));
-            Menu newMenu = new Menu(price,menuDescription);
-            newMenu.setRestaurant(restaurant);
-            newMenu = menuRepository.save(newMenu);
-            logger.debug("trying to print saved newMenu");
-//        System.out.println(newMenu); lazy inti exception
-            msgToAdmin = "menu added succes";
-        }
 
 
-        attributes.addFlashAttribute("msgToAdmin", msgToAdmin);
-        return "redirect:admin";
-    }
 
-    private String getDescription(HttpServletRequest request) {
-        StringBuilder sb = new StringBuilder();
-        String dish1 = request.getParameter("dish1");
-        addDish(dish1,sb);
-        String dish2 = request.getParameter("dish2");
-        addDish(dish2,sb);
-        String dish3 = request.getParameter("dish3");
-        addDish(dish3,sb);
-        String dish4 = request.getParameter("dish4");
-        addDish(dish4,sb);
-        String dish5 = request.getParameter("dish5");
-        addDish(dish5,sb);
-        return sb.toString();
-    }
-
-    private void addDish(String dish1, StringBuilder sb) {
-        if(!dish1.isEmpty()){
-            sb.append(dish1);
-            sb.append(", ");
-        }
-    }
 }

@@ -50,6 +50,12 @@ public class Menu {
         this.price = price;
         this.description = description;
     }
+    public Menu(int id,LocalDate localDate, double price, String description) {
+        this.localDate = localDate;
+        this.price = price;
+        this.description = description;
+        this.id = id;
+    }
     public Menu(double price, String description) {
         this.localDate = LocalDate.now();
         this.price = price;
@@ -112,7 +118,7 @@ public class Menu {
                 ", localDate=" + localDate +
                 ", price=" + price +
                 ", description='" + description + '\'' +
-                ", restaurant=" + restaurant.getName() +
+//                ", restaurant=" + restaurant.getName() +
                 '}';
     }
 }

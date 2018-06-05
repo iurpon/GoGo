@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
-<h3><a href="/voting">Home</a></h3>
+<h3><a href="${pageContext.request.contextPath}">Home</a></h3>
 <h2>Admin</h2>
 <hr/>
+
+
 
 <%--<div>${msg}</div>
 &lt;%&ndash;<div>${restaurantName}</div>&ndash;%&gt;--%>
@@ -35,10 +37,20 @@
             <td>${lunch.restaurantName}</td>
             <td>${lunch.description}</td>
             <td>${lunch.price}</td>
-            <td><a href="addMenu/${lunch.restId}/${lunch.restaurantName}">Add</a></td>
+            <td><a href="admin/addMenu/${lunch.restId}/${lunch.restaurantName}">Add</a></td>
 
         </tr>
     </c:forEach>
+
+
 </table>
+
+
+<br>
+<br>
+<form method="post" action="/voting/admin/start">
+    <button type="submit">Menu is ready. Start voting</button>
+</form>
+<h1>${aboutVote}</h1>
 </body>
 </html>

@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class VotingStorage {
     public static final LocalTime timeLimit = LocalTime.of(12,00);
+    public static Map<LocalDate,Boolean> startVoting = new HashMap<>();
 //    private static final LocalTime localTimeNow = LocalTime.of(11,00);
     private VotingStorage() {
     }

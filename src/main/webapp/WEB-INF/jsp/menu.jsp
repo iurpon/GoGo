@@ -14,7 +14,7 @@
 <%--<h1>Representing lunch for date ${date}</h1>--%>
 <%--<span>${choise}</span>--%>
 <div>${msg}</div>
-<%--<div>${restaurantName}</div>--%>
+<div>${notReadyMsg}</div>
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
 

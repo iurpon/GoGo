@@ -25,6 +25,7 @@ INSERT INTO meals (date_time, description, calories, user_id) VALUES
 -- DELETE FROM users;
 DELETE FROM menu;
 DELETE FROM restaurant;
+DELETE FROM users;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO restaurant (name) VALUES
@@ -35,7 +36,7 @@ INSERT INTO restaurant (name) VALUES
   ('Burger King');
 
 INSERT INTO menu (date, price, description, rest_id) VALUES
-  ('2018-05-27', 23.34, 'chicken, barbeque sauce, vegetable, slice bread, milk', 100000),
+  ('2018-05-27', 23.35, 'chicken, barbeque sauce, vegetable, slice bread, milk', 100000),
   ('2018-05-27', 18.22, 'hot dog, french fries, beans, fruit, milk',     100001),
   ('2018-05-27', 20.01, 'taco, cheese , salsa, fruit, milk', 100002),
   ('2018-05-27', 23.34, 'cheese, pizza, vegetable,fruit, milk', 100003),

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
-<h3><a href="../../index.html">Home</a></h3>
+<h3><a href="${pageContext.request.contextPath}">Home</a></h3>
 <h2>Meals</h2>
 <hr/>
 <h1>Representing lunch for date ${date}</h1>
