@@ -14,7 +14,7 @@ public class LunchData {
             "hamburger, ketchup, backed chips, fruit, milk",
 
     };
-    public static List<LunchXX> lunchList = new ArrayList<>();
+/*    public static List<LunchXX> lunchList = new ArrayList<>();
 
     public static final LunchXX LUNCH1
             = new LunchXX(description[0],"Always fresh", 23.34, LocalDate.of(2018,5,23));
@@ -32,5 +32,5 @@ public class LunchData {
         lunchList.add(LUNCH3);
         lunchList.add(LUNCH4);
         lunchList.add(LUNCH5);
-    }
+    }*/
 }

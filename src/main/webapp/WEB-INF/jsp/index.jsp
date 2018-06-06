@@ -22,13 +22,6 @@
     </form>
 
 
-    <form>
-        <div>
-            <label for="party">Choose your preferred party date:</label>
-            <input type="date" id="party" name="party" min="2017-04-01" max="2017-04-30">
-        </div>
-    </form>
-
 </ul>
 </body>
 </html>
