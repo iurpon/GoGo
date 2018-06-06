@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <h3><a href="/voting">Home</a></h3>
 <h2>Meals</h2>
 <hr/>
 <%--<h1>Representing lunch for date ${date}</h1>--%>
-<%--<span>${choise}</span>--%>
+
+<pre>${votingMsgResult}</pre>
 <div>${msg}</div>
 <div>${notReadyMsg}</div>
 <table border="1" cellpadding="8" cellspacing="0">
@@ -38,5 +40,6 @@
         </tr>
     </c:forEach>
 </table>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

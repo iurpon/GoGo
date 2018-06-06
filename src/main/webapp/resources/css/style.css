@@ -4,3 +4,9 @@ tr[equalsName="true"] {
 div{
     color : forestgreen;
 }
+
+h3{
+    color: #83dfff;
+    font-family: "Times New Roman", Times, serif;;
+    font-style : italic;
+}

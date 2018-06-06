@@ -9,6 +9,7 @@ import ru.firstproject.model.Vote;
 import ru.firstproject.repository.VoteRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public class DataJpaVoteRepository implements VoteRepository{
@@ -33,5 +34,10 @@ public class DataJpaVoteRepository implements VoteRepository{
     public Vote getUserVote(int userId, LocalDate date) {
         logger.debug("DataJpaVoteRepository getUserVote()");
         return repository.findUserVote(userId,date);
+    }
+
+    @Override
+    public List<Vote> getTodayVotes() {
+        return repository.getAllByRegistered(LocalDate.now());
     }
 }

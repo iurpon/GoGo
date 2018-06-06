@@ -28,10 +28,12 @@ public class DataJpaMenuRepositoryImpl  implements MenuRepository{
 
     @Override
     public List<Menu> findByDate(LocalDate date) {
+        logger.debug("DataJpaMenuRepositoryImpl findByLocalDate()");
         List<Menu> menuList = repository.findByLocalDateOrderByPriceAsc(date);
         if(menuList == null){
             return Collections.emptyList();
         }
+
         return menuList;
     }
 

@@ -6,6 +6,7 @@
     <jsp:include page="fragments/headTag.jsp"/>
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <ul>
     <hr>
     <form method="post" action="users">
@@ -20,8 +21,7 @@
         </select>
         <button type="submit">Select</button>
     </form>
-
-
 </ul>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

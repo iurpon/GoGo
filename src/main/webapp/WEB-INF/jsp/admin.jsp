@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <h3><a href="${pageContext.request.contextPath}">Home</a></h3>
 <h2>Admin</h2>
 <hr/>
@@ -52,5 +53,14 @@
     <button type="submit">Menu is ready. Start voting</button>
 </form>
 <h1>${aboutVote}</h1>
+<h1>${votingStarted}</h1>
+
+<form method="post" action="/voting/admin/addRestaurant">
+    <p><input type="text"  name="restaurantName">
+        <button type="submit">Add new restaurant</button>
+    </p>
+
+</form>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

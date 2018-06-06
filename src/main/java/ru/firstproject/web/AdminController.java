@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.firstproject.model.Label;
 import ru.firstproject.model.Menu;
 import ru.firstproject.model.Restaurant;
 import ru.firstproject.to.LunchView;
@@ -37,19 +38,29 @@ public class AdminController extends AbstractController {
         List<Menu> menuList = menuRepository.findByDate(LocalDate.now());
         List<LunchView> lunchViewList = createLunchView(restaurantList,menuList);
         model.addAttribute("lunchList",lunchViewList);
-        model.addAttribute("minDate",DATETODAY);
-        model.addAttribute("maxDAte",DATEAFTERTOMMOROW);
+//        model.addAttribute("minDate",DATETODAY);
+//        model.addAttribute("maxDAte",DATEAFTERTOMMOROW);
 
 
         return "admin";
     }
 
     @GetMapping("/addMenu/{id}/{restaurantName}")
-    public String addMenu(@PathVariable("id") int restId, Model model, @PathVariable("restaurantName") String name){
+    public String addMenu(@PathVariable("id") int restId, Model model,
+                          @PathVariable("restaurantName") String name,RedirectAttributes attributes){
         logger.debug("/addMenu getmappint");
-        model.addAttribute("restId",restId);
-        model.addAttribute("restaurantName",name);
-        return "addForm";
+        if(labelRepository.isMenuReady()){
+            logger.debug("menu is ready");
+            attributes.addFlashAttribute("votingStarted","Sorry.Voting already started. Cant add new menu");
+            return "redirect:/admin";
+        }else{
+            logger.debug("menu not ready");
+            model.addAttribute("restId",restId);
+            model.addAttribute("restaurantName",name);
+            return "addForm";
+        }
+
+
     }
     @PostMapping("/addMenu")
     public String addMenu(Model model, HttpServletRequest request, RedirectAttributes attributes){
@@ -80,9 +91,23 @@ public class AdminController extends AbstractController {
     }
     @PostMapping("/start")
     public String startVoting(RedirectAttributes attributes){
-        VotingStorage.startVoting.clear();
-        VotingStorage.startVoting.put(LocalDate.now(),true);
-        attributes.addFlashAttribute("aboutVote", "Vote started");
+
+        Label label = labelRepository.getToday();
+        if(label == null){
+            labelRepository.add(new Label());
+            attributes.addFlashAttribute("aboutVote", "Vote started");
+        }
+
+
+        return "redirect:/admin";
+    }
+    @PostMapping("/addRestaurant")
+    public String addRestaurant(HttpServletRequest request){
+
+        String restName = request.getParameter("restaurantName");
+        restaurantRepository.save(new Restaurant(restName));
+
+
         return "redirect:/admin";
     }
 

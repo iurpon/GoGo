@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <h3><a href="${pageContext.request.contextPath}">Home</a></h3>
 <h2>Meals</h2>
 <hr/>
@@ -42,5 +43,6 @@
         </tr>
     </c:forEach>
 </table>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

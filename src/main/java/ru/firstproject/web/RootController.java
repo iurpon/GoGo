@@ -27,6 +27,7 @@ import ru.firstproject.utils.VotingStorage;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -46,13 +47,21 @@ public class RootController  extends AbstractController{
     public String users(Model model, RedirectAttributes attributes) {
         logger.debug("RootController Get(/menu");
 
-        if(VotingStorage.startVoting.get(LocalDate.now())!= null){
+        if(labelRepository.isMenuReady()){
             Vote vote = voteRepository.getUserVote(AuthorizedUser.getId(),LocalDate.now());
             if(vote != null){
                 checkVote(AuthorizedUser.getId(),model,vote.getRestaurant().getName());
             }
+            List<Vote> resultVoting = voteRepository.getTodayVotes();
+            String resultVotingMsg = "";
+            if(resultVoting != null ){
+                logger.debug("resultVoting != null");
+                 resultVotingMsg = getMsg(resultVoting);
+            }
 
-            model.addAttribute("menus", menuRepository.getAll());
+
+            model.addAttribute("votingMsgResult", resultVotingMsg);
+            model.addAttribute("menus", menuRepository.findByDate(LocalDate.now()));
         }else{
             model.addAttribute("notReadyMsg","Sorry.Menu not ready");
         }
@@ -62,6 +71,20 @@ public class RootController  extends AbstractController{
         return "menu";
     }
 
+    private String getMsg(List<Vote> resultVoting) {
+        logger.info("getMsg");
+        StringBuilder sb = new StringBuilder("Voting Result : \n");
+        Map<String,Integer> map = new HashMap<>();
+                resultVoting.stream()
+                .forEach(v -> map.merge(v.getRestaurant().getName(),1, (v1,v2) -> v1+v2));
+        if(map.isEmpty()){
+            return "No voting results yet";
+        }
+        else{
+            map.keySet().stream().forEach( str -> sb.append(str + " : " + map.get(str)+ "\n"));
+        }
+        return sb.toString();
+    }
 
 
     @GetMapping("/restaurant/{id}/{restaurantName}")
