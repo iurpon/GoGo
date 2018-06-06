@@ -1,7 +1,8 @@
 
-DELETE FROM RESTAURANT;
+
 DELETE FROM MENU;
 DELETE FROM USERS;
+DELETE FROM RESTAURANT;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO restaurant (name) VALUES
@@ -23,6 +24,6 @@ INSERT INTO users (NAME, EMAIL, PASSWORD,ISADMIN) VALUES
   ('user1','user1@mail.ru','pass1',FALSE ),
   ('user2','user2@mail.ru','pass2',FALSE),
   ('user3','user3@mail.ru','pass3',FALSE),
-  ('user4','user1@mail.ru','pass4',FALSE),
+  ('user4','user4@mail.ru','pass4',FALSE),
   ('user5','user5@mail.ru','pass5',FALSE),
   ('admin','admin@mail.ru','passAdmin',TRUE );

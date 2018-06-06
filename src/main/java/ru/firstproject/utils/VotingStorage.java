@@ -8,9 +8,8 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class VotingStorage {
-    public static final LocalTime timeLimit = LocalTime.of(12,00);
+    public static final LocalTime timeLimit = LocalTime.of(11,00);
     public static Map<LocalDate,Boolean> startVoting = new HashMap<>();
-//    private static final LocalTime localTimeNow = LocalTime.of(11,00);
     private VotingStorage() {
     }
 
@@ -27,7 +26,6 @@ public class VotingStorage {
             todayResults = new HashMap<>();
             todayResults.put(userId,restaurantName);
             voteHistory.put(now,todayResults);
-//            return voted;
         }
         todayResults.values().stream().forEach(System.out::println);
         if(todayResults.get(userId) == null){
@@ -65,7 +63,6 @@ public class VotingStorage {
     public static String getVote(int userId){
         Objects.requireNonNull(userId);
         Map<Integer,String> map = voteHistory.get(LocalDate.now());
-//        Objects.requireNonNull(map);
         if(map == null) return null;
         String restaurant = map.get(userId);
         return restaurant;

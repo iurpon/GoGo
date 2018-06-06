@@ -12,7 +12,7 @@ import ru.firstproject.model.Label;
 import ru.firstproject.model.Menu;
 import ru.firstproject.model.Restaurant;
 import ru.firstproject.to.LunchView;
-import ru.firstproject.utils.VotingStorage;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -24,10 +24,6 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/admin")
 public class AdminController extends AbstractController {
-    private static final LocalDate DATETODAY = LocalDate.now();
-    private static final LocalDate DATEAFTERTOMMOROW = LocalDate.now().plusDays(3);
-
-
 
 
     @GetMapping()
@@ -38,9 +34,6 @@ public class AdminController extends AbstractController {
         List<Menu> menuList = menuRepository.findByDate(LocalDate.now());
         List<LunchView> lunchViewList = createLunchView(restaurantList,menuList);
         model.addAttribute("lunchList",lunchViewList);
-//        model.addAttribute("minDate",DATETODAY);
-//        model.addAttribute("maxDAte",DATEAFTERTOMMOROW);
-
 
         return "admin";
     }
@@ -81,7 +74,6 @@ public class AdminController extends AbstractController {
             newMenu.setRestaurant(restaurant);
             newMenu = menuRepository.save(newMenu);
             logger.debug("trying to print saved newMenu");
-//        System.out.println(newMenu); lazy inti exception
             msgToAdmin = "menu added succes";
         }
 
@@ -98,7 +90,6 @@ public class AdminController extends AbstractController {
             attributes.addFlashAttribute("aboutVote", "Vote started");
         }
 
-
         return "redirect:/admin";
     }
     @PostMapping("/addRestaurant")
@@ -106,7 +97,6 @@ public class AdminController extends AbstractController {
 
         String restName = request.getParameter("restaurantName");
         restaurantRepository.save(new Restaurant(restName));
-
 
         return "redirect:/admin";
     }
@@ -132,10 +122,7 @@ public class AdminController extends AbstractController {
                     );
             return lunchViewList;
         }
-//        logger.debug("why we are here?");
-//        return null;
     }
-
 
     private String getDescription(HttpServletRequest request) {
         StringBuilder sb = new StringBuilder();

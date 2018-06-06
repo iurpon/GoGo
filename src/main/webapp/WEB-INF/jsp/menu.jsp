@@ -9,10 +9,10 @@
 </head>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
-<h3><a href="/voting">Home</a></h3>
+<h3><a href="${pageContext.request.contextPath}">Home</a></h3>
 <h2>Meals</h2>
 <hr/>
-<%--<h1>Representing lunch for date ${date}</h1>--%>
+
 
 <pre>${votingMsgResult}</pre>
 <div>${msg}</div>
