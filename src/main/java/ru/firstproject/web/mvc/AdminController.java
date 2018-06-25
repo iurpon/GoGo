@@ -1,4 +1,4 @@
-package ru.firstproject.web;
+package ru.firstproject.web.mvc;
 
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +12,7 @@ import ru.firstproject.model.Label;
 import ru.firstproject.model.Menu;
 import ru.firstproject.model.Restaurant;
 import ru.firstproject.to.LunchView;
+import ru.firstproject.web.AbstractController;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -101,28 +102,7 @@ public class AdminController extends AbstractController {
         return "redirect:/admin";
     }
 
-    private List<LunchView> createLunchView(List<Restaurant> restaurantList, List<Menu> menuList) {
-        logger.debug(" createLunchView ");
-        if(menuList.isEmpty()){
-            logger.debug("menuList is empty");
-            List<LunchView> lunchViewList = restaurantList.stream()
-                    .map(LunchView::new)
-                    .collect(Collectors.toList());
-            return lunchViewList;
-        }else{
-            logger.debug("menulist not empty");
-            Map<Integer,Menu> menuMap = menuList.stream()
-                    .collect(Collectors.toMap(m -> m.getRestaurant().getId(),m -> m));
-            List<LunchView> lunchViewList = new ArrayList<>();
-            restaurantList.stream().
-                    forEach(r -> lunchViewList.add(
-                            new LunchView(r,menuMap.getOrDefault(r.getId(),new Menu(0.0,"")).getDescription()
-                                    ,menuMap.getOrDefault(r.getId(),new Menu(0.0,"")).getPrice())
-                            )
-                    );
-            return lunchViewList;
-        }
-    }
+
 
     private String getDescription(HttpServletRequest request) {
         StringBuilder sb = new StringBuilder();

@@ -28,12 +28,12 @@ public class Menu {
 
     @Column(name = "date",nullable = false)
     @NotNull
-    private LocalDate localDate;
+    private LocalDate localDate = LocalDate.now();
 
     @Column(name = "price",nullable = false)
     @NotNull
     private double price;
-//    private String[] dishes;
+
 
     @Column(name = "description",nullable = false)
     @NotNull

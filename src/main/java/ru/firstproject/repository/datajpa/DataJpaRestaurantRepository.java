@@ -19,7 +19,15 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     @Override
     public Restaurant get(int id) {
         logger.info("DataJpaRestaurantRepository get(int id)");
-        return repository.getOne(id);
+        Restaurant restaurant = repository.findById(id).orElse(null);
+        logger.debug("restaurant {}" + restaurant);
+        return restaurant;
+    }
+
+    @Override
+    public Restaurant getByName(String name) {
+        logger.debug("dataJpaRestaurantRepository getByName");
+        return repository.getByName(name);
     }
 
     @Override
@@ -36,5 +44,11 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     @Override
     public List<Restaurant> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public void delete(int id) {
+        logger.debug("dataJpaRestRep delete id {}",id);
+        repository.deleteById(id);
     }
 }

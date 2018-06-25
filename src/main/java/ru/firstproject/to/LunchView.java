@@ -29,6 +29,7 @@ public class LunchView {
         this.description = description;
         this.price = price;
     }
+
     /*
     private void fillTheView(List<Menu> menu){
         if(menu == null){

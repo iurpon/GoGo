@@ -1,8 +1,5 @@
-package ru.firstproject.web;
+package ru.firstproject.web.mvc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,28 +10,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.firstproject.AuthorizedUser;
-import ru.firstproject.model.Menu;
 import ru.firstproject.model.Restaurant;
 import ru.firstproject.model.User;
 import ru.firstproject.model.Vote;
-import ru.firstproject.repository.MenuRepository;
-import ru.firstproject.repository.UserRepository;
-import ru.firstproject.repository.VoteRepository;
-import ru.firstproject.repository.RestaurantRepository;
-import ru.firstproject.to.LunchView;
 import ru.firstproject.utils.VotingStorage;
+import ru.firstproject.web.AbstractController;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
-public class RootController  extends AbstractController{
+public class RootController  extends AbstractController {
 
 
 

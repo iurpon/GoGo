@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.firstproject.model.Restaurant;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface ProxyRestaurantRepository extends JpaRepository<Restaurant,Integer> {
+
+
     @Override
-    Restaurant getOne(Integer integer);
+    Optional<Restaurant> findById(Integer integer);
+
+    Restaurant getByName(String name);
 
     @Override
     @Transactional
@@ -23,4 +28,8 @@ public interface ProxyRestaurantRepository extends JpaRepository<Restaurant,Inte
 
     @Override
     List<Restaurant> findAll();
+
+    @Override
+    @Transactional
+    void deleteById(Integer integer);
 }

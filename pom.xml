@@ -21,6 +21,7 @@
         <!-- spring -->
         <spring.version>5.0.4.RELEASE</spring.version>
         <spring-data-jpa.version>2.0.5.RELEASE</spring-data-jpa.version>
+        <jackson-json.version>2.9.5</jackson-json.version>
 
         <!-- Hibernate -->
         <hibernate.version>5.2.16.Final</hibernate.version>
@@ -35,6 +36,9 @@
 
         <!-- db -->
         <postgresql.version>42.2.2</postgresql.version>
+
+
+
 
     </properties>
 
@@ -116,6 +120,13 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data-jpa.version}</version>
+        </dependency>
+
+        <!--JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-json.version}</version>
         </dependency>
 
 
