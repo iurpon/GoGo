@@ -42,14 +42,25 @@ public class RestAdminController extends AbstractController {
 
     @PostMapping(value = "/restaurant/{id}/menu",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     LunchView addLunch(@RequestBody Menu menu,@PathVariable("id") int id){
+        logger.debug("RestAdminController addLunch");
         Restaurant restaurant = restaurantRepository.get(id);
+        logger.debug("restaurant is {}",restaurant);
         menu.setRestaurant(restaurant);
-        menuRepository.save(menu);
+        logger.debug("menu is {}",menu);
+        List<Menu> list = menuRepository.findByDate(LocalDate.now());
+        boolean isPresent = list.stream().anyMatch(m -> m.getRestaurant().getId() == id);
+        logger.debug(" isPresent " + isPresent + " menu for restaurant " + id);
+        if(!isPresent){
+            menuRepository.save(menu);
+        }
+
+        logger.debug("menu is {}",menu);
         LunchView lunchView = new LunchView(restaurant,menu.getDescription(),menu.getPrice());
         return lunchView;
     }
     @GetMapping(value = "/restaurant/menu",produces = MediaType.APPLICATION_JSON_VALUE)
     List<LunchView> getTodayLunch(){
+        logger.debug("getTodayLunch /restaurant/menu");
         List<Restaurant> restaurantList = restaurantRepository.getAll();
         List<Menu> menuList = menuRepository.findByDate(LocalDate.now());
         List<LunchView> lunchViewList = createLunchView(restaurantList,menuList);

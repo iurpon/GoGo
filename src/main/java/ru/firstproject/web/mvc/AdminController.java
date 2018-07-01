@@ -75,7 +75,7 @@ public class AdminController extends AbstractController {
             newMenu.setRestaurant(restaurant);
             newMenu = menuRepository.save(newMenu);
             logger.debug("trying to print saved newMenu");
-            msgToAdmin = "menu added succes";
+            msgToAdmin = "menu added succesfully";
         }
 
 

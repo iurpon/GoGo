@@ -1,5 +1,6 @@
 package ru.firstproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.AccessType;
 
 import javax.persistence.*;
@@ -45,6 +46,7 @@ public class User {
 
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Vote> votes;
 
     public List<Vote> getVotes() {

@@ -13,7 +13,7 @@
     <jpa:repositories base-package="ru.firstproject.repository.datajpa"/>
 
     <!--POSTGRES-->
-<!--    <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
+    <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
 
         <bean id="dataSource"
               class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -25,11 +25,11 @@
         <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
             <jdbc:script location="classpath:db/initDB.sql"/>
             <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
-        </jdbc:initialize-database>-->
+        </jdbc:initialize-database>
 
 
 
-    <!--HSQLDB-->
+<!--    &lt;!&ndash;HSQLDB&ndash;&gt;
     <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -42,7 +42,7 @@
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="classpath:db/initDB_hsql.sql"/>
         <jdbc:script encoding="utf-8" location="classpath:db/populateDB_hsqldb.sql"/>
-    </jdbc:initialize-database>
+    </jdbc:initialize-database>-->
 
 
 

@@ -20,6 +20,7 @@ public class Main {
 
 
        }*/
+    System.out.println(2<<15);
 
 
 
